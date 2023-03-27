@@ -91,3 +91,5 @@ debian/*
 
 # project local vim settings
 .vim/
+/.build_*
+/.idea
