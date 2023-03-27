@@ -424,7 +424,7 @@ struct UA_InterruptManager {
  * The POSIX compatibility of WIN32 is 'close enough'. So a joint implementation
  * is provided. */
 
-#if defined(UA_ARCHITECTURE_POSIX) || defined(UA_ARCHITECTURE_WIN32)
+#if defined(UA_ARCHITECTURE_PICO) || defined(UA_ARCHITECTURE_POSIX) || defined(UA_ARCHITECTURE_WIN32)
 
 UA_EXPORT UA_EventLoop *
 UA_EventLoop_new_POSIX(const UA_Logger *logger);
@@ -566,7 +566,7 @@ UA_ConnectionManager_new_POSIX_Ethernet(const UA_String eventSourceName);
 UA_EXPORT UA_InterruptManager *
 UA_InterruptManager_new_POSIX(const UA_String eventSourceName);
 
-#endif /* defined(UA_ARCHITECTURE_POSIX) || defined(UA_ARCHITECTURE_WIN32) */
+#endif /* defined(UA_ARCHITECTURE_PICO) || defined(UA_ARCHITECTURE_POSIX) || defined(UA_ARCHITECTURE_WIN32) */
 
 _UA_END_DECLS
 

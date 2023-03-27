@@ -1,6 +1,7 @@
 #ifdef UA_ARCHITECTURE_PICO
 
 #include <open62541/types.h>
+#include <FreeRTOS.h>
 #include <task.h>
 
 #ifdef UA_ARCHITECTURE_PICO_POSIX_CLOCK

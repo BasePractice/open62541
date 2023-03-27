@@ -15,7 +15,7 @@
 #define UA_UNLOCK(lock)
 #define UA_LOCK_ASSERT(lock, num)
 #endif
-
+#define UA_INPROGRESS EINPROGRESS
 #define UA_strncasecmp strncasecmp
 
 // freeRTOS does not have getifaddr
@@ -28,6 +28,8 @@
          && ((const uint32_t *) (a))[2] == 0                                      \
          && ((const uint32_t *) (a))[3] == 0)
 #endif
+
+char *gai_strerror(int code);
 
 #include <open62541/architecture_functions.h>
 

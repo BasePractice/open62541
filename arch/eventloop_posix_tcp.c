@@ -255,6 +255,8 @@ TCP_listenSocketCallback(UA_ConnectionManager *cm, TCP_FD *conn, short event) {
 
     /* Log the name of the remote host */
     char hoststr[UA_MAXHOSTNAME_LENGTH];
+#if !defined(UA_ARCHITECTURE_PICO)
+
     int get_res = UA_getnameinfo((struct sockaddr *)&remote, sizeof(remote),
                                  hoststr, sizeof(hoststr),
                                  NULL, 0, NI_NUMERICHOST);
@@ -267,6 +269,11 @@ TCP_listenSocketCallback(UA_ConnectionManager *cm, TCP_FD *conn, short event) {
     UA_LOG_INFO(cm->eventSource.eventLoop->logger, UA_LOGCATEGORY_NETWORK,
                 "TCP %u\t| Connection opened from \"%s\" via the server socket %u",
                 (unsigned)newsockfd, hoststr, (unsigned)conn->rfd.fd);
+#else
+    hoststr[0] = 0;
+#endif
+
+
 
     /* Configure the new socket */
     UA_StatusCode res = UA_STATUSCODE_GOOD;
@@ -344,6 +351,7 @@ TCP_registerListenSocket(UA_POSIXConnectionManager *pcm, struct addrinfo *ai,
 
     /* Get the hostname information */
     char hoststr[UA_MAXHOSTNAME_LENGTH];
+#if !defined(UA_ARCHITECTURE_PICO)
     int get_res = UA_getnameinfo(ai->ai_addr, ai->ai_addrlen, hoststr,
                                  sizeof(hoststr), NULL, 0, NI_NUMERICHOST);
     if(get_res != 0) {
@@ -353,6 +361,9 @@ TCP_registerListenSocket(UA_POSIXConnectionManager *pcm, struct addrinfo *ai,
                           "TCP\t| getnameinfo(...) could not resolve the "
                           "hostname (%s)", errno_str));
     }
+#else
+    hoststr[0] = 0;
+#endif
 
     /* Create the server socket */
     UA_FD listenSocket = UA_socket(ai->ai_family, ai->ai_socktype, ai->ai_protocol);

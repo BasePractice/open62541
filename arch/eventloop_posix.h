@@ -12,7 +12,7 @@
 #include <open62541/config.h>
 #include <open62541/plugin/eventloop.h>
 
-#if defined(UA_ARCHITECTURE_POSIX) || defined(UA_ARCHITECTURE_WIN32)
+#if defined(UA_ARCHITECTURE_PICO) || defined(UA_ARCHITECTURE_POSIX) || defined(UA_ARCHITECTURE_WIN32)
 
 #include "common/ua_timer.h"
 #include "open62541_queue.h"
@@ -167,6 +167,6 @@ UA_EventLoopPOSIX_setReusable(UA_FD sockfd);
 
 _UA_END_DECLS
 
-#endif /* defined(UA_ARCHITECTURE_POSIX) || defined(UA_ARCHITECTURE_WIN32) */
+#endif /* defined(UA_ARCHITECTURE_PICO) || defined(UA_ARCHITECTURE_POSIX) || defined(UA_ARCHITECTURE_WIN32) */
 
 #endif /* UA_EVENTLOOP_POSIX_H_ */

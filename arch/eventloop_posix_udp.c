@@ -622,6 +622,7 @@ UDP_registerListenSocket(UA_POSIXConnectionManager *pcm, UA_UInt16 port,
 
     /* Get logging information */
     char hoststr[UA_MAXHOSTNAME_LENGTH];
+#if !defined(UA_ARCHITECTURE_PICO)
     int get_res = UA_getnameinfo(info->ai_addr, info->ai_addrlen,
                                  hoststr, sizeof(hoststr),
                                  NULL, 0, NI_NUMERICHOST);
@@ -635,6 +636,9 @@ UDP_registerListenSocket(UA_POSIXConnectionManager *pcm, UA_UInt16 port,
             return UA_STATUSCODE_BADCONNECTIONREJECTED;
         }
     }
+#else
+    hoststr[0] = 0;
+#endif
 
     /* Create the listen socket */
     UA_FD listenSocket = UA_socket(info->ai_family, info->ai_socktype, info->ai_protocol);

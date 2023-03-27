@@ -2,6 +2,10 @@
 
 #include <open62541/types.h>
 
+char *gai_strerror(int code) {
+    return 0;
+}
+
 unsigned int UA_socket_set_blocking(UA_SOCKET sockfd){
   int on = 0;
   if(lwip_ioctl(sockfd, FIONBIO, &on) < 0)

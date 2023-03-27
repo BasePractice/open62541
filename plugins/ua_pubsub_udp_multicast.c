@@ -353,12 +353,12 @@ UA_setLoopBackData(UA_SOCKET *sockfd,
                    UA_Boolean enableLoopback,
                    int ai_family) {
     /* Set loop back data to your host */
+    UA_Int32 enable = enableLoopback;
 #if UA_IPV6
     /* The Linux Kernel IPv6 socket code checks for optlen to be at least the
      * size of an integer. However, channelDataUDPMC->enableLoopback is a
      * boolean. In order for the code to work for IPv4 and IPv6 propagate it to
      * a temporary integer here. */
-    UA_Int32 enable = enableLoopback;
     if(UA_setsockopt(*sockfd,
                      ai_family == AF_INET6 ? IPPROTO_IPV6 : IPPROTO_IP,
                      ai_family == AF_INET6 ? IPV6_MULTICAST_LOOP : IP_MULTICAST_LOOP,

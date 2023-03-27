@@ -404,7 +404,11 @@ startPOSIXInterruptManager(UA_EventSource *es) {
 #ifdef _WIN32
     int err = pair(pipefd);
 #else
+#if defined(UA_ARCHITECTURE_PICO)
+    int err = -1;
+#else
     int err = pipe(pipefd);
+#endif
 #endif
     if(err != 0) {
         UA_LOG_SOCKET_ERRNO_WRAP(
