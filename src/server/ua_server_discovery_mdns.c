@@ -23,12 +23,19 @@
 # include <ws2tcpip.h>
 #else
 # include <sys/time.h> // for struct timeval
+#if defined(UA_ARCHITECTURE_PICO)
+#else
 # include <netinet/in.h> // for struct ip_mreq
+#endif
 # if defined(UA_HAS_GETIFADDR)
 #  include <ifaddrs.h>
 # endif /* UA_HAS_GETIFADDR */
+#if defined(UA_ARCHITECTURE_PICO)
+# include <lwip/netdb.h>
+#else
 # include <net/if.h> /* for IFF_RUNNING */
 # include <netdb.h> // for recvfrom in cygwin
+#endif
 #endif
 
 static struct serverOnNetwork_list_entry *
