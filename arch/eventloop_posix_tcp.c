@@ -805,6 +805,7 @@ TCP_openActiveConnection(UA_POSIXConnectionManager *pcm, const UA_KeyValueMap *p
     /* Non-blocking connect */
     error = UA_connect(newSock, info->ai_addr, info->ai_addrlen);
     freeaddrinfo(info);
+    //FIXME: UA_ERRNO != 0 добавлено из-за того что не выставлялся errno в EINPROGRESS, а сам EINPROGRESS был равен 119
     if(error != 0 &&
        UA_ERRNO != UA_INPROGRESS &&
        UA_ERRNO != UA_WOULDBLOCK) {
