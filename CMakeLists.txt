@@ -906,7 +906,7 @@ if(UA_ENABLE_DISCOVERY_MULTICAST)
   include(GenerateExportHeader)
     set(MDNSD_LOGLEVEL 300 CACHE STRING "Level at which logs shall be reported" FORCE)
     # create a "fake" empty library to generate the export header macros
-    add_library(libmdnsd ${PROJECT_SOURCE_DIR}/deps/mdnsd/libmdnsd/mdnsd.h)
+    add_library(libmdnsd INTERFACE ${PROJECT_SOURCE_DIR}/deps/mdnsd/libmdnsd/mdnsd.h)
     if (UA_FORCE_CPP)
         set_property(TARGET libmdnsd PROPERTY LINKER_LANGUAGE CXX)
     else()
